@@ -5,8 +5,8 @@ var Sidebar = React.createClass({
     render:function(){
         return(
             <header id="header">
-                <div class="inner">
-                    <a href="#" class="image avatar"><img src="images/avatar.jpg" alt="" /></a>
+                <div className="inner">
+                    <a href="#" className="image avatar"><img src="images/avatar.jpg" alt="" /></a>
                     <h1><strong>{this.props.name}</strong></h1>
                     <p>{this.props.title}</p>
 

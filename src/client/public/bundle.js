@@ -21978,10 +21978,10 @@
 	            { id: 'header' },
 	            _react2.default.createElement(
 	                'div',
-	                { 'class': 'inner' },
+	                { className: 'inner' },
 	                _react2.default.createElement(
 	                    'a',
-	                    { href: '#', 'class': 'image avatar' },
+	                    { href: '#', className: 'image avatar' },
 	                    _react2.default.createElement('img', { src: 'images/avatar.jpg', alt: '' })
 	                ),
 	                _react2.default.createElement(
