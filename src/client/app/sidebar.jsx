@@ -2,18 +2,23 @@ import React from 'react';
 import { Router, Route, Link, browserHistory } from 'react-router'
 var Sidebar = React.createClass({
     render:function(){
-            <header id="header">
+        var pages = [];
+        for (var i = 0; i < this.props.pages.length; i++) {
+            pages.push(<li key={i}><Link to={`/#{this.props.pages[i]}`}>{this.props.pages[i]}</Link></li>)
+        }
+        const ulStyle={
+            "list-style": "none"
+        }
+        return (<header id="header">
                 <div className="inner">
                     <a href="#" className="image avatar"><img src="images/avatar.jpg" alt="" /></a>
                     <h1><strong>{this.props.name}</strong></h1>
                     <p>{this.props.title}</p>
-                    <ul>
-                    {this.props.pages.map(page => (
-                        <li key={page}><Link to={`#${page}`}>{page}</Link></li>
-                    ))}
+                    <ul style={ulStyle}>
+                    {pages}
                     </ul>
                 </div>
-            </header>
+            </header>)
     }
 })
 module.exports = Sidebar;

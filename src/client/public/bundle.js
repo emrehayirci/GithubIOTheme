@@ -21995,7 +21995,22 @@
 	    displayName: 'Sidebar',
 	
 	    render: function render() {
-	        _react2.default.createElement(
+	        var pages = [];
+	        for (var i = 0; i < this.props.pages.length; i++) {
+	            pages.push(_react2.default.createElement(
+	                'li',
+	                { key: i },
+	                _react2.default.createElement(
+	                    _reactRouter.Link,
+	                    { to: '/#{this.props.pages[i]}' },
+	                    this.props.pages[i]
+	                )
+	            ));
+	        }
+	        var ulStyle = {
+	            "list-style": "none"
+	        };
+	        return _react2.default.createElement(
 	            'header',
 	            { id: 'header' },
 	            _react2.default.createElement(
@@ -22022,18 +22037,8 @@
 	                ),
 	                _react2.default.createElement(
 	                    'ul',
-	                    null,
-	                    this.props.pages.map(function (page) {
-	                        return _react2.default.createElement(
-	                            'li',
-	                            { key: page },
-	                            _react2.default.createElement(
-	                                _reactRouter.Link,
-	                                { to: '#' + page },
-	                                page
-	                            )
-	                        );
-	                    })
+	                    { style: ulStyle },
+	                    pages
 	                )
 	            )
 	        );
