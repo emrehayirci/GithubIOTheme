@@ -92,6 +92,21 @@
 	        return _react2.default.createElement(_sidebar2.default, { name: 'Emre Hay\u0131rc\u0131', title: 'Free Software Enthusiast', pages: this.state.pages });
 	    }
 	});
+	_reactDom2.default.render(_react2.default.createElement(
+	    Router,
+	    null,
+	    _react2.default.createElement(
+	        Route,
+	        { path: '/', component: App },
+	        _react2.default.createElement(IndexRoute, { component: Dashboard }),
+	        _react2.default.createElement(Route, { path: 'about', component: About }),
+	        _react2.default.createElement(
+	            Route,
+	            { path: 'inbox', component: Inbox },
+	            _react2.default.createElement(Route, { path: 'messages/:id', component: Message })
+	        )
+	    )
+	), document.body);
 	_reactDom2.default.render(_react2.default.createElement(App, null), document.getElementById('top'));
 
 /***/ },
