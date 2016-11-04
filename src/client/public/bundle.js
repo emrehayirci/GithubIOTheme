@@ -69,15 +69,19 @@
 	    texts: [],
 	    getInitialState: function getInitialState() {
 	        //creating pages
-	        var obj = {};
-	        obj.pages = [];
-	        obj.pages.push("Blog");
-	        obj.pages.push("About");
-	        obj.pages.push("Contact");
-	        obj.pages.push("Legal");
+	        var obj = {
+	            pages: {
+	                "blog": "Blog",
+	                "about-me": "About",
+	                "contact": "Contact",
+	                "legal": "Legal"
+	            }
+	        };
+	
 	        return obj;
 	    },
 	    getTexts: function getTexts() {
+	        // NOTE: mutating an existing class member is not the best practise in such provider methods // Eser
 	        //currently creating random texts
 	        texts.push({ title: "lorem ipsum 1 ", text: "lorem ipsum dolor sit amet text" });
 	        texts.push({ title: "lorem ipsum 2 ", text: "lorem ipsum dolor sit amet text" });
@@ -89,24 +93,21 @@
 	        texts.push({ title: "lorem ipsum 8 ", text: "lorem ipsum dolor sit amet text" });
 	    },
 	    render: function render() {
-	        return _react2.default.createElement(_sidebar2.default, { name: 'Emre Hay\u0131rc\u0131', title: 'Free Software Enthusiast', pages: this.state.pages });
+	        // TODO: since it's the App element, I suggest implementing react-router's <Router> tags here
+	        // then Sidebar element should be moved into component(s) that router addressed // Eser
+	        return _react2.default.createElement(
+	            Router,
+	            null,
+	            _react2.default.createElement(_sidebar2.default, { name: 'Emre Hay\u0131rc\u0131', title: 'Free Software Enthusiast', pages: this.state.pages }),
+	            _react2.default.createElement(
+	                Route,
+	                { path: '/', component: App },
+	                _react2.default.createElement(Route, { path: 'about', component: About })
+	            )
+	        );
 	    }
 	});
-	_reactDom2.default.render(_react2.default.createElement(
-	    Router,
-	    null,
-	    _react2.default.createElement(
-	        Route,
-	        { path: '/', component: App },
-	        _react2.default.createElement(IndexRoute, { component: Dashboard }),
-	        _react2.default.createElement(Route, { path: 'about', component: About }),
-	        _react2.default.createElement(
-	            Route,
-	            { path: 'inbox', component: Inbox },
-	            _react2.default.createElement(Route, { path: 'messages/:id', component: Message })
-	        )
-	    )
-	), document.body);
+	
 	_reactDom2.default.render(_react2.default.createElement(App, null), document.getElementById('top'));
 
 /***/ },
@@ -22011,20 +22012,46 @@
 	
 	    render: function render() {
 	        var pages = [];
-	        for (var i = 0; i < this.props.pages.length; i++) {
-	            pages.push(_react2.default.createElement(
-	                'li',
-	                { key: i },
-	                _react2.default.createElement(
-	                    _reactRouter.Link,
-	                    { to: '/#{this.props.pages[i]}' },
-	                    this.props.pages[i]
-	                )
-	            ));
+	
+	        var _iteratorNormalCompletion = true;
+	        var _didIteratorError = false;
+	        var _iteratorError = undefined;
+	
+	        try {
+	            for (var _iterator = Object.keys(this.props.pages)[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+	                var key = _step.value;
+	
+	                var value = this.props.pages[key];
+	
+	                pages.push(_react2.default.createElement(
+	                    'li',
+	                    { key: 'link-' + key },
+	                    _react2.default.createElement(
+	                        _reactRouter.Link,
+	                        { to: key },
+	                        value
+	                    )
+	                ));
+	            }
+	        } catch (err) {
+	            _didIteratorError = true;
+	            _iteratorError = err;
+	        } finally {
+	            try {
+	                if (!_iteratorNormalCompletion && _iterator.return) {
+	                    _iterator.return();
+	                }
+	            } finally {
+	                if (_didIteratorError) {
+	                    throw _iteratorError;
+	                }
+	            }
 	        }
+	
 	        var ulStyle = {
 	            "list-style": "none"
 	        };
+	
 	        return _react2.default.createElement(
 	            'header',
 	            { id: 'header' },
@@ -22059,6 +22086,7 @@
 	        );
 	    }
 	});
+	
 	module.exports = Sidebar;
 	
 	/*
